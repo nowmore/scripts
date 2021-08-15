@@ -2,7 +2,6 @@
 
 ANIME_REGEX="href=\"(.*html)\">(.*)</a>?.*title=\"(.*)\">"
 INDEX=1
-CHOICE=1
 declare -a URL_ARR
 function sscanf() 
 {
@@ -25,17 +24,9 @@ function release()
     IFS=$OLD_IFS
 }
 
-#    CHOICE=$input
-#    else
-#        echo "emmm, $input not exist!"
-#    fi
-
-#mpv --fs $(curl -s http://www.yhdm.so/v/5341-1.html | grep -Eo "changeplay\(.*\\\$" | grep -Eo "http.*(?[A-Za-z0-9])")
-
 release
 echo "input index of the anime, Ctrl c to exit.."
 read input
 if [[ -v "URL_ARR[$input]" ]]; then
-    echo "http://www.yhdm.so/${URL_ARR[$input]}"
     mpv --fs $(curl -s http://www.yhdm.so/${URL_ARR[$input]} | grep -Eo "changeplay\(.*\\\$" | grep -Eo "http.*(?[A-Za-z0-9])")
 fi
